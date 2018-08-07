@@ -1,0 +1,13 @@
+.gradle/
+/capture
+bin
+gen
+/obj/
+.idea
+gradle/
+gradlew
+gradlew.bat
+/local.properties
+*.iml
+settings_self.gradle
+*.ec
