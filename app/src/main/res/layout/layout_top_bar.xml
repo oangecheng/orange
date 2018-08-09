@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <com.ustc.orange.orange.ui.widget.OrangeTopBar
+    android:id="@+id/orange_top_bar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    app:leftTextColor="#ffffff"
+    app:leftText="Back"
+
+    app:title="自定义标题"
+    app:titleTextSize="5sp"
+    app:titleTextColor="#123412"
+
+    app:rightTextColor="#ffffff"
+    app:rightText="More"/>
+
+</RelativeLayout>

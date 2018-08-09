@@ -3,15 +3,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ui.activity.MainActivity">
+  tools:context=".ui.activity.AccountActivity">
 
   <include layout="@layout/layout_top_bar" />
-
-  <ImageView
-    android:id="@+id/account_iv"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:layout_centerInParent="true"
-    android:background="@drawable/account_icon"/>
 
 </RelativeLayout>
