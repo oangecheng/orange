@@ -1,20 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
-  <com.ustc.orange.orange.ui.widget.OrangeTopBar
-    android:id="@+id/orange_top_bar"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    app:leftTextColor="#ffffff"
-    app:leftText="Back"
+  android:layout_height="@dimen/top_bar_height"
+  android:background="@color/base">
 
-    app:title="自定义标题"
-    app:titleTextSize="5sp"
-    app:titleTextColor="#123412"
+  <TextView
+    android:id="@+id/top_bar_left_tv"
+    android:layout_width="60dp"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_alignParentStart="true"
+    android:layout_centerVertical="true"
+    android:layout_marginStart="@dimen/margin_5"
+    android:textSize="14sp"
+    android:textColor="@color/white_common"
+    android:visibility="gone" />
 
-    app:rightTextColor="#ffffff"
-    app:rightText="More"/>
+  <ImageView
+    android:id="@+id/top_bar_left_iv"
+    android:layout_width="@dimen/top_bar_height"
+    android:layout_height="@dimen/top_bar_height"
+    android:padding="10dp"
+    android:layout_alignParentStart="true"
+    android:layout_centerVertical="true"
+    android:layout_marginStart="@dimen/margin_5" />
+
+  <TextView
+    android:id="@+id/top_bar_middle_tv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:textColor="@color/white_common"
+    android:textSize="16sp" />
+
+  <TextView
+    android:id="@+id/top_bar_right_tv"
+    android:layout_width="60dp"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:layout_marginEnd="@dimen/margin_5"
+    android:textSize="14sp"
+    android:textColor="@color/white_common"
+    android:visibility="gone" />
+
+  <ImageView
+    android:id="@+id/top_bar_right_iv"
+    android:layout_width="@dimen/top_bar_height"
+    android:layout_height="@dimen/top_bar_height"
+    android:padding="10dp"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:layout_marginEnd="@dimen/margin_5"
+    android:visibility="gone" />
 
 </RelativeLayout>

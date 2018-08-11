@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="top_bar_height">40dp</dimen>
+
+  <dimen name="margin_default">3dp</dimen>
+  <dimen name="margin_5">5dp</dimen>
+  <dimen name="margin_10">10dp</dimen>
+
+  <dimen name="text_size_5">5sp</dimen>
+  <dimen name="text_size_6">6sp</dimen>
+  <dimen name="text_size_7">7sp</dimen>
+  <dimen name="text_size_8">8sp</dimen>
+  <dimen name="text_size_9">9sp</dimen>
+  <dimen name="text_size_10">10sp</dimen>
+  <dimen name="text_size_11">11sp</dimen>
+  <dimen name="text_size_12">12sp</dimen>
+  <dimen name="text_size_13">13sp</dimen>
+
+</resources>

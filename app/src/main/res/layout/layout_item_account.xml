@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center_vertical"
+  android:orientation="vertical">
+
+  <TextView
+    android:id="@+id/account_website"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margin_default"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textSize="16sp" />
+
+  <TextView
+    android:id="@+id/account_username"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margin_default"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textSize="16sp" />
+
+  <TextView
+    android:id="@+id/account_pwd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margin_default"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textSize="16sp" />
+
+
+</LinearLayout>

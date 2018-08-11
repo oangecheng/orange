@@ -5,6 +5,16 @@
   android:layout_height="match_parent"
   tools:context=".ui.activity.AccountActivity">
 
-  <include layout="@layout/layout_top_bar" />
+  <com.ustc.orange.orange.ui.widget.OrangeTopBar
+    android:id="@+id/account_top_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/account_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/account_top_bar"
+    android:layout_margin="3dp" />
 
 </RelativeLayout>

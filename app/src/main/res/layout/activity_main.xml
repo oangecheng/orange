@@ -5,13 +5,16 @@
   android:layout_height="match_parent"
   tools:context=".ui.activity.MainActivity">
 
-  <include layout="@layout/layout_top_bar" />
+  <com.ustc.orange.orange.ui.widget.OrangeTopBar
+    android:id="@+id/home_top_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 
   <ImageView
     android:id="@+id/account_iv"
     android:layout_width="60dp"
     android:layout_height="60dp"
     android:layout_centerInParent="true"
-    android:background="@drawable/account_icon"/>
+    android:background="@drawable/account_icon" />
 
 </RelativeLayout>
