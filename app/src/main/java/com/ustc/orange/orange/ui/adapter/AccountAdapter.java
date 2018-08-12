@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ustc.orange.orange.R;
 import com.ustc.orange.orange.enity.AccountInfo;
+import com.ustc.orange.orange.utils.CommonUtils;
 
 import java.util.List;
 
@@ -35,8 +37,12 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
   @Override
   public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
     holder.website.setText(mData.get(i).website);
-    holder.username.setText(mData.get(i).username);
-    holder.password.setText(mData.get(i).password);
+    holder.username.setText("账号:  " + mData.get(i).username);
+    holder.password.setText("密码:  " + mData.get(i).password);
+    holder.time.setText("更新:  " + CommonUtils.formatTime(mData.get(i).time));
+    if (mData.get(i).type == 0) {
+      holder.image.setImageDrawable(mContext.getDrawable(R.drawable.account_icon));
+    }
   }
 
   public void setData(List<AccountInfo> data) {
@@ -49,17 +55,20 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
   }
 
   public class ViewHolder extends RecyclerView.ViewHolder {
-
+    @BindView(R.id.account_image)
+    ImageView image;
     @BindView(R.id.account_website)
     TextView website;
     @BindView(R.id.account_username)
     TextView username;
     @BindView(R.id.account_pwd)
     TextView password;
+    @BindView(R.id.account_time)
+    TextView time;
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
-      ButterKnife.bind(this,itemView);
+      ButterKnife.bind(this, itemView);
     }
   }
 }

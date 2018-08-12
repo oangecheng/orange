@@ -22,8 +22,8 @@ public class AccountInfo {
   @SerializedName("type")
   public int type;
 
-  @SerializedName("description")
-  public String description;
+  @SerializedName("time")
+  public long time;
 
   public AccountInfo() {
   }
@@ -53,11 +53,19 @@ public class AccountInfo {
     return this;
   }
 
-  public void setType(int type) {
+  public AccountInfo setType(int type) {
     this.type = type;
+    return this;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public AccountInfo setTime(long time) {
+    this.time = time;
+    return this;
+  }
+
+  public AccountInfo update(AccountInfo newAccount) {
+    return this.setId(newAccount.id).setWebsite(newAccount.website).setUsername(newAccount.username)
+        .setPassword(newAccount.password).setLevel(newAccount.level).setType(newAccount.type)
+        .setTime(newAccount.time);
   }
 }

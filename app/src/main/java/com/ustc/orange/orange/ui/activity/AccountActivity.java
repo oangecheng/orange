@@ -13,24 +13,14 @@ import com.ustc.orange.orange.enity.AccountInfo;
 import com.ustc.orange.orange.others.OnTopBarClickAdapter;
 import com.ustc.orange.orange.ui.adapter.AccountAdapter;
 import com.ustc.orange.orange.ui.widget.OrangeTopBar;
-import com.ustc.orange.orange.utils.StegoManager;
+import com.ustc.orange.orange.utils.AccountManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class AccountActivity extends BaseActivity {
 
@@ -39,7 +29,7 @@ public class AccountActivity extends BaseActivity {
   @BindView(R.id.account_recycler_view)
   RecyclerView mRecyclerView;
 
-  private StegoManager mStegoManager;
+  private AccountManager mAccountManager;
   private List<AccountInfo> mList = new ArrayList<>();
   private AccountAdapter mAccountAdapter;
   private Handler mHandler = new Handler();
@@ -49,22 +39,9 @@ public class AccountActivity extends BaseActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    initData();
-
-    GridLayoutManager manager = new GridLayoutManager(this, 2);
-    mRecyclerView.setLayoutManager(manager);
-    mAccountAdapter = new AccountAdapter(this);
-    mAccountAdapter.setData(mList);
-    mRecyclerView.setAdapter(mAccountAdapter);
-  }
-
-  private void initData() {
-    mStegoManager = new StegoManager();
-    executor.submit(() -> {
-      mList = mStegoManager.getAllDataFromImage();
-      mAccountAdapter.setData(mList);
-      mHandler.post(() -> mAccountAdapter.notifyDataSetChanged());
-    });
+//    initData();
+    getTestData();
+    initView();
   }
 
   @Override
@@ -85,13 +62,31 @@ public class AccountActivity extends BaseActivity {
 
           @Override
           public void onRightClick() {
-            Toast.makeText(context, "我是右边", Toast.LENGTH_SHORT).show();
+            finish();
           }
         });
   }
 
+  private void initData() {
+    mAccountManager = new AccountManager();
+    executor.submit(() -> {
+      mList = mAccountManager.getAllDataFromImage();
+      mAccountAdapter.setData(mList);
+      mHandler.post(() -> mAccountAdapter.notifyDataSetChanged());
+    });
+  }
+
+
+  private void initView(){
+    GridLayoutManager manager = new GridLayoutManager(this, 1);
+    mRecyclerView.setLayoutManager(manager);
+    mAccountAdapter = new AccountAdapter(this);
+    mAccountAdapter.setData(mList);
+    mRecyclerView.setAdapter(mAccountAdapter);
+  }
+
   private void getTestData() {
-    mList.add(new AccountInfo().setWebsite("百度").setUsername("281725011@qq.com").setPassword("orange"));
+    mList.add(new AccountInfo().setWebsite("百度").setUsername("281725011@qq.com").setPassword("orange").setTime(System.currentTimeMillis()));
     mList.add(new AccountInfo().setWebsite("谷歌").setUsername("orange910617@gmail.com").setPassword("orange"));
     mList.add(new AccountInfo().setWebsite("QQ").setUsername("281725011").setPassword("orange"));
     mList.add(new AccountInfo().setWebsite("微信").setUsername("cheng2859427").setPassword("orange"));

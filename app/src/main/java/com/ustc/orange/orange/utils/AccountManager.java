@@ -1,10 +1,8 @@
 package com.ustc.orange.orange.utils;
 
-import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.hddata.stegoutil.Algorithm.Interface.IStegoUtil;
 import com.hddata.stegoutil.Algorithm.StegoUtil;
 import com.hddata.stegoutil.Common.StegoConstant;
@@ -17,32 +15,54 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class StegoManager {
+public class AccountManager {
 
   public static final String AES_KEY = "73B1CEB582F4FE6E";
+  public static final int SUCCESS = 0;
 
   private static final String STEGO_KEY = "orange";
   private static final String algorithm = "AES";
   private static final String IV_STRING = "^@01HkG_+1%01!]l";
   private static final String mode = "AES/CBC/PKCS5Padding";
   private static final int offset = 16;
-  private static final String TAG = StegoManager.class.getSimpleName();
+  private static final String TAG = AccountManager.class.getSimpleName();
 
   private JsonManager<AccountInfo> mJsonManager;
   private String mPath;
 
-  public StegoManager() {
+  public AccountManager() {
     mJsonManager = new JsonManager<>();
     mPath = FileUtil.getAccountPath() + File.separator + FileUtil.ACCOUNT_IMAGE_NAME;
   }
 
-  public int insert(AccountInfo account) {
+  public int addAccount(AccountInfo account) {
     List<AccountInfo> accountList = getAllDataFromImage();
     accountList.add(account);
-    String msg = mJsonManager.listToJson(accountList);
-    int status = embed(msg, mPath, mPath, STEGO_KEY);
+    return embedAccount(accountList);
+  }
+
+  public int updateAccount(AccountInfo newAccount, int position) {
+    List<AccountInfo> accountList = getAllDataFromImage();
+    if (accountList.get(position) == null || newAccount == null) {
+      return -1;
+    }
+    accountList.get(position).update(newAccount);
+    return embedAccount(accountList);
+  }
+
+  public int delete(int position) {
+    List<AccountInfo> accountList = getAllDataFromImage();
+    if (accountList.get(position) == null) {
+      return -1;
+    }
+    accountList.remove(position);
+    return embedAccount(accountList);
+  }
+
+  public int clear() {
+    int status = embed("", mPath, mPath, STEGO_KEY);
     Log.d(TAG, status + "");
-    return embed(msg, mPath, mPath, STEGO_KEY);
+    return status;
   }
 
   public List<AccountInfo> getAllDataFromImage() {
@@ -50,19 +70,15 @@ public class StegoManager {
     return mJsonManager.jsonToList(msg, AccountInfo.class);
   }
 
-  public void delete(int accountId) {
-    IStegoUtil stegoUtil = StegoUtil.getInstance();
-    long handler = stegoUtil.createHandler();
-  }
-
-  public int clear(){
-    int status = embed("", mPath, mPath, STEGO_KEY);
+  private int embedAccount(List<AccountInfo> accountInfoList){
+    String msg = mJsonManager.listToJson(accountInfoList);
+    int status = embed(msg, mPath, mPath, STEGO_KEY);
     Log.d(TAG, status + "");
-    return status;
+    return embed(msg, mPath, mPath, STEGO_KEY);
   }
 
 
-  public String encrypt(String key, String content) throws Exception {
+  private String encrypt(String key, String content) throws Exception {
     SecretKeySpec skey = new SecretKeySpec(key.getBytes(), algorithm);
     IvParameterSpec iv = new IvParameterSpec(IV_STRING.getBytes(), 0, offset);
     Cipher cipher = Cipher.getInstance(mode);
@@ -71,7 +87,7 @@ public class StegoManager {
     return Base64.encodeToString(result, Base64.DEFAULT);
   }
 
-  public String decrypt(String key, String content) throws Exception {
+  private String decrypt(String key, String content) throws Exception {
     SecretKeySpec skey = new SecretKeySpec(key.getBytes(), algorithm);
     IvParameterSpec iv = new IvParameterSpec(IV_STRING.getBytes(), 0, offset);
     Cipher cipher = Cipher.getInstance(mode);
